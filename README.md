@@ -15,3 +15,5 @@ Libraries:
 
 Template used:
 - SB Admin Dashboard
+
+[Doc](https://docs.google.com/document/d/1f5jHvXBUzAhQesvGUSaZaMNQpuEFdWGIyyYCwUJki6U/edit#heading=h.e1x4s04k4w7a)
