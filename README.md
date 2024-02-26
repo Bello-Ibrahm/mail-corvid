@@ -14,4 +14,4 @@ Libraries:
 - Summernote
 
 Template used:
-- AdminLTE
+- SB Admin Dashboard
