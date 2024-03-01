@@ -1,0 +1,10 @@
+Options All -Indexes
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^(.*)$ $1.php
+# Handle error page
+ErrorDocument 404 http://localhost/mail-corvid/404
