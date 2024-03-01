@@ -1,26 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+if (session_status() == PHP_SESSION_NONE){
+  session_start();
+}
 
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Login</title>
-
-  <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-</head>
-
-<body class="">
+include("includes/header.php");
+include("code.php");
+?>
 
   <div class="container">
 
@@ -34,16 +19,53 @@
               <div class="col-md-8">
                 <div class="p-5">
                   <div class="mb-4">
-                    <h1 class="h4 text-center  text-gray-900">Welcome Back!</h1>
+                    <h1 class="h4 text-center  text-gray-900">Sign in</h1>
                     <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit quidem aut, iusto veritatis odio ea?</p>
                     <hr>
                   </div>
-                  <form class="user" method="post">
+                  <form class="user" method="post" action="index">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" required aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                      <input type="text" name="username" class="form-control form-control-user" required autocomplete="off" placeholder="Enter username...">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" required  placeholder="Password">
+                      <input type="password" class="form-control form-control-user" name="pwd" required autocomplete="off"  placeholder="Password">
+                    </div>
+                    <div class="bot-div mb-2">
+                        <input type="checkbox" class="m-1" onchange="toggleBotDisplay();" id="bot_checkbox"> <label for="bot_checkbox"> I'm not a Bot? </label>
+                    </div>
+                    <div class="row d-none form-inline mb-2" id="bot-eval">
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <input type="number" disabled  class="form-control q1">
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <label for=""> + </label>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <input type="number" disabled  class="form-control q2">
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <label for=""> = </label>
+                          <input type="text" class="form-control total" hidden>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <input type="number" onkeypress="isEqual();" onkeyup="isEqual();" class="form-control ans"  placeholder="" required>
+                        </div>  
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <i class="fas fa-check text-success d-none" id="success"></i>    
+                          <i class="fas fa-times text-danger d-none" id="fail"></i>
+                        </div>  
+                      </div>
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -51,16 +73,16 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <a href="#" class="btn btn-primary btn-user btn-block">
+                    <button class="btn btn-primary btn-user btn-block" name="btn-submit" disabled>
                       Login
-                    </a>
+                    </button>
                     <hr>
                   </form>
                   <div class="">
-                    <a class="small" href="#">Forgot Password?</a>
+                    <a class="small" href="forgot-password">Forgot Password?</a>
                   </div>
                   <div class="">
-                    <a class="small" href="#">Create an Account!</a>
+                    <a class="small" href="sign-up">Create an Account!</a>
                   </div>
                 </div>
               </div>
@@ -75,16 +97,6 @@
 
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-
-</body>
-
-</html>
+  <?php
+        include("./includes/footer.php");
+        ?>
