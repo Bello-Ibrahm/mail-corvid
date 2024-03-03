@@ -4,7 +4,7 @@ DROP DATABASE IF EXISTS mailcorvid_db;
 -- Create database + user if doesn't exist
 CREATE DATABASE IF NOT EXISTS mailcorvid_db;
 CREATE USER IF NOT EXISTS 'mailcorvid_user'@'localhost';
-SET PASSWORD FOR 'mailcorvid_user'@'localhost' = 'mailcorvid_user_@123';
+SET PASSWORD FOR 'mailcorvid_user'@'localhost' = PASSWORD('mailcorvid_user_@123');
 GRANT ALL ON mailcorvid_db.* TO 'mailcorvid_user'@'localhost';
 GRANT SELECT ON performance_schema.* TO 'mailcorvid_user'@'localhost';
 FLUSH PRIVILEGES;
@@ -33,16 +33,19 @@ CREATE TABLE `user_tbl` (
     `passport` VARCHAR(200) NULL COMMENT 'User image',
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Date of registration',
     `last_login` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `act_status` TINYINT NOT NULL COMMENT 'Account status (1 active, 0 inactive)'
+    `act_status` TINYINT NOT NULL DEFAULT 1 COMMENT 'Account status (1 active, 0 inactive)'
 ) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 -- Insert record into user table
-INSERT INTO user_tbl(fname, sname, oname, email, pwd, user_type, passport) 
+INSERT INTO user_tbl(fname, sname, oname, username, email, pwd, user_type, passport) 
 VALUES('John', 'Doe', '', 'username', 'admin@admin.com', 'pwd', 'user', '');
 
 
 -- Create message table columns
+
+DROP TABLE IF EXISTS `message_tbl`;
+
 CREATE TABLE `message_tbl` (
     -- Primary key column
     `message_id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -54,7 +57,9 @@ CREATE TABLE `message_tbl` (
 
 
 -- Create category table columns
-CREATE TABLE `message_tbl` (
+DROP TABLE IF EXISTS `category_tbl`;
+
+CREATE TABLE `category_tbl` (
     -- Primary key column
     `category_id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     `category_name` VARCHAR(150) NOT NULL,
@@ -63,6 +68,8 @@ CREATE TABLE `message_tbl` (
 
 
 -- Create contact table columns
+DROP TABLE IF EXISTS `contact_tbl`;
+
 CREATE TABLE `contact_tbl` (
     -- Primary key column
     `contact_id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -76,6 +83,8 @@ CREATE TABLE `contact_tbl` (
 
 
 -- Create block_contact table columns
+DROP TABLE IF EXISTS `block_contact_tbl`;
+
 CREATE TABLE `block_contact_tbl` (
     -- Primary key column
     `block_id` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
