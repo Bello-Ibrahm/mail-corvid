@@ -17,3 +17,10 @@ Template used:
 - SB Admin Dashboard
 
 [Doc](https://docs.google.com/document/d/1f5jHvXBUzAhQesvGUSaZaMNQpuEFdWGIyyYCwUJki6U/edit#heading=h.e1x4s04k4w7a)
+
+[Remove image background](https://www.remove.bg/)
+
+[Presentation page](https://docs.google.com/presentation/d/1UoLx8TwU-ElV5p2gvRlxC1QhcPTSeVH7C9WogWi_BXQ/edit#slide=id.g2c62dba5049_0_48)
+
+
+Visit the [Mailcorvid](mailcorvid.an-nur-info-tech.com)
