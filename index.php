@@ -1,8 +1,4 @@
 <?php
-if (session_status() == PHP_SESSION_NONE){
-  session_start();
-}
-
 include("includes/header.php");
 include("code.php");
 ?>
@@ -20,10 +16,30 @@ include("code.php");
                 <div class="p-5">
                   <div class="mb-4">
                     <h1 class="h4 text-center  text-gray-900">Sign in</h1>
-                    <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit quidem aut, iusto veritatis odio ea?</p>
+                    <p>
+                    Your best email marketing platform that provides mailing services for businesses and individuals. 
+                    This offers features such as email campaign creation, audience management, 
+                    and marketing automation.
+                    </p>
                     <hr>
                   </div>
-                  <form class="user" method="post" action="index">
+                  <form class="user" method="post" action="">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group text-center">
+                            <?php 
+                                if (isset($_SESSION['err'])){
+                                  echo "<div class='text-white bg-danger p-1 form-control'>". $_SESSION['err'] ."</div>";
+                                  unset($_SESSION['err']);
+                                }
+                                if (isset($_SESSION['msg'])){
+                                  echo "<div class='alert alert-success'>". $_SESSION['msg'] ."</div>";
+                                  unset($_SESSION['msg']);
+                                }
+                                ?>
+                          </div>
+                      </div>
+                    </div>
                     <div class="form-group">
                       <input type="text" name="username" class="form-control form-control-user" required autocomplete="off" placeholder="Enter username...">
                     </div>
@@ -69,11 +85,11 @@ include("code.php");
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        <input type="checkbox" class="custom-control-input" name="remember_me" id="customCheck">
+                        <label class="custom-control-label"  for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <button class="btn btn-primary btn-user btn-block" name="btn-submit" disabled>
+                    <button class="btn btn-primary btn-user btn-block" name="btn-login" disabled>
                       Login
                     </button>
                     <hr>

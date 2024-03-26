@@ -1,5 +1,6 @@
 <?php
 include("includes/header.php");
+include("code.php");
 ?>
 
 
@@ -16,48 +17,80 @@ include("includes/header.php");
                 <div class="py-5 px-2">
                   <div class="mb-4">
                     <h1 class="h4 text-center  text-gray-900">Sign up!</h1>
-                    <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit quidem aut, iusto veritatis odio ea?</p>
+                    <p>
+                      Your best email marketing platform that provides mailing services for businesses and individuals. 
+                      This offers features such as email campaign creation, audience management, 
+                      and marketing automation.
+                    </p>
                     <hr>
                   </div>
-                  <form class="user" method="post">
+                  <form class="user" method="post" action="sign-up" enctype="multipart/form-data">
+                    <div class="row my-5 text-center">
+                      <div class="col">
+                          <img id="image" class="form-control-img img-thumbnail" width="100px" height="100px" />
+                          <p class="text-danger" style="font-size: 13px;"> Image size should be in the range of 1KB to 100KB</p>
+                          <input type="file" name="fileToUpload" onchange="loadFile(event)" />
+                          <br>
+                          <span class="text-danger small"><?php if (isset($errorPicture)){echo $errorPicture;} ?></span>
+                      </div>
+                    </div>
+                    <div class="row text-center">
+                      <div class="col">
+                        <div class="form-group">
+                          <?php 
+                              if (isset($errorSuccess)){
+                                echo "<div class='text-white bg-success p-1 form-control'>$errorSuccess</div>";
+                              }
+                              if (isset($errorMsg)){
+                                echo "<div class='text-white bg-danger p-1 form-control'>$errorMsg</div>";
+                              }
+                              ?>
+                        </div>
+                      </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="exampleInputEmail" placeholder="Enter first name">
+                                <input type="text" class="form-control form-control-user" value="<?php if (isset($_POST['fname'])){echo $_POST['fname'];} ?>" name="fname" placeholder="Enter first name">
+                                <span class="text-danger small"><?php if (isset($errorFname)){echo $errorFname;} ?></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="exampleInputEmail" required placeholder="Enter other name">
+                                <input type="text" class="form-control form-control-user" value="<?php if (isset($_POST['oname'])){echo $_POST['oname'];} ?>" name="oname" placeholder="Enter other name">
+                                <span class="text-danger small"><?php if (isset($errorOname)){echo $errorOname;} ?></span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="exampleInputEmail" required placeholder="Enter your username">
+                                <input type="text" class="form-control form-control-user" value="<?php if (isset($_POST['username'])){echo $_POST['username'];} ?>" name="username" placeholder="Enter your username">
+                                <span class="text-danger small"><?php if (isset($errorUsername)){echo $errorUsername;} ?></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" required placeholder="Enter Email Address...">
+                                <input type="email" class="form-control form-control-user" name="email" value="<?php if (isset($_POST['email'])){echo $_POST['email'];} ?>" placeholder="Enter Email Address...">
+                                <span class="text-danger small"><?php if (isset($errorEmail)){echo $errorEmail;} ?></span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                              <input type="password" class="form-control form-control-user" id="exampleInputPassword" required  placeholder="Password">
+                              <input type="password" class="form-control form-control-user" name="pwd"  placeholder="Password">
+                              <span class="text-danger small"><?php if (isset($errorPassword)){echo $errorPassword;} ?></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                              <input type="password" class="form-control form-control-user" id="exampleInputPassword" required  placeholder="Confirm your password">
-                              <span class="text-danger small">Confirm your password</span>
+                              <input type="password" class="form-control form-control-user" name="confirm_pwd" placeholder="Confirm your password">
+                              <span class="text-danger small"><?php if (isset($errorConfirmPassword)){echo $errorConfirmPassword;} ?></span>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-user btn-block">
+                    <button class="btn btn-primary btn-user btn-block" name="btn_signup">
                       Sign-up
                     </button>
                     <hr>

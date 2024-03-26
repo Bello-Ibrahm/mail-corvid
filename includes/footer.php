@@ -14,6 +14,11 @@
 <script src="js/sb-admin-2.min.js"></script>
 <script src="js/main.js"></script>
 
+<!-- summernote js -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script> -->
+<script src="vendor/summernote-bs4.min.js"></script>
+
+
 </body>
 
 </html>
