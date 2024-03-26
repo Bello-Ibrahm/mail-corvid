@@ -37,3 +37,36 @@ const isEqual = () => {
         document.querySelector(".btn-user").setAttribute("disabled", "");
     }
 }
+
+// Load image display
+const loadFile = function (event) {
+    let image = document.getElementById('image');
+    image.src = URL.createObjectURL(event.target.files[0]);
+    image.onload = function () {
+        URL.revokeObjectURL(image.src)
+    }
+};
+
+$(document).ready(function() {
+    $('#summernote').summernote({
+        placeholder: 'You can type in your message here',
+        tabsize: 5,
+        height: 200
+    });
+});
+
+// Swal.fire({
+//     title: "success",
+//     text: "This is a test",
+//     icon: "success",
+//     showConfirmButton: true,
+//     confirmButtonText: "ok"
+//   });
+
+// Swal.fire({
+//     position: "top-end",
+//     icon: "warning",
+//     title: "Contact already subscribed",
+//     showConfirmButton: false,
+//     timer: 2000
+// });
