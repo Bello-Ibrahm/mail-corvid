@@ -24,7 +24,9 @@ if (isset($_POST['mail_cat_btn'])){
             $db->bind(':category_name', $category_name);
 
             if ($db->execute()){
-                echo "Success";
+                $_SESSION['msg'] = true;
+                $_SESSION['sessionIcon'] = "success";
+                $_SESSION['errorTitle'] = "Success";
             }else{
                 die("Error: ".$db->getError());
             }
@@ -139,19 +141,16 @@ if(isset($_POST['send_mail_btn'])){
     }
 }
     // Logout
-if (isset($_POST['btn-logout'])){
-    echo "Hello Hello hello";
-    // $_SESSION['logged_in'] = false;
-    // unset($_SESSION['remember_me']);
-    // unset($_SESSION['username']);
-    // unset($_SESSION['user_id']);
-    // unset($_SESSION['fname']);
-    // unset($_SESSION['oname']);
-    // unset($_SESSION['user_type']);
-    // unset($_SESSION['login-time']);
-    // unset($_SESSION['passport']);
+if (isset($_POST['logout'])){
+    $_SESSION['logged_in'] = false;
+    unset($_SESSION['remember_me']);
+    unset($_SESSION['username']);
+    unset($_SESSION['user_id']);
+    unset($_SESSION['fname']);
+    unset($_SESSION['oname']);
+    unset($_SESSION['user_type']);
+    unset($_SESSION['login-time']);
+    unset($_SESSION['passport']);
     
-    // header("Location: ../index");
+    header("Location: ../index");
 }
-
-// echo "Helloooooooo";
