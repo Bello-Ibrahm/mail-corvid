@@ -32,8 +32,9 @@ function SetSubscriptionPage($user, $user_id)
                 if ($db->execute()) {
                     if ($db->rowCount() > 0) {
                         // Check if already subscribed
-                        $db->query("SELECT email_address FROM contact_tbl WHERE email_address = :email;");
+                        $db->query("SELECT email_address FROM contact_tbl WHERE email_address = :email AND user_id = :user_id;");
                         $db->bind(\':email\', $email);
+                        $db->bind(\':user_id\', $user_id);
                         if ($db->execute()) {
                             if ($db->rowCount() > 0) {
                                 $_SESSION[\'msgWarning\'] = "Already subscibed";
@@ -47,8 +48,7 @@ function SetSubscriptionPage($user, $user_id)
                                 $db->bind(\':oname\', $oname);
                                 $db->bind(\':email\', $email);
 
-                                if ($db->execute()) {
-                                    contactCreationMail($email, $fname.\' \'.$oname);
+                                if (($db->execute()) && (Mail::contactCreationMail($email, $fname.\' \'.$oname))) {
                                     $_SESSION[\'msgSuccess\'] = "Successfully subscribed";
                                 } else {
                                     die("Error: " . $db->getError());
