@@ -12,10 +12,9 @@ class Mail
     private static $username = "input_your_username";
     private static $password = "input_your_password";
 
-    public static function sendMail($email, $subject, $body)
-    {
+    public static function sendMail($to, $subject, $body){
         $mail = new PHPMailer(true);
-
+        
         try {
             //Server settings
             // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
@@ -26,21 +25,17 @@ class Mail
             $mail->Password   = self::$password;                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  //           //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
+    
             //Recipients
             $mail->setFrom('mailcorvid@an-nur-info-tech.com', 'Mailcorvid client');
-            $mail->addAddress($email);     //Add a recipient
-            // $mail->addAddress('ellen@example.com');               //Name is optional
-            $mail->addReplyTo($email);
-            // $mail->addCC('cc@example.com');
-            // $mail->addBCC('bcc@example.com');
-
+            $mail->addAddress($to);     //Add a recipient
+            // $mail->addReplyTo($to);
+    
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = $subject;
             $mail->Body    = $body;
-            // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
+    
             $mail->send();
             return true;
         } catch (Exception $e) {
@@ -50,7 +45,7 @@ class Mail
         }
     }
 
-    public static function contactCreationMail($email, $name)
+    public static function contactCreationMail($to, $name)
     {
         $mail = new PHPMailer(true);
 
@@ -67,11 +62,8 @@ class Mail
 
             //Recipients
             $mail->setFrom('mailcorvid@an-nur-info-tech.com', 'Mailcorvid client');
-            $mail->addAddress($email);     //Add a recipient
-            // $mail->addAddress('ellen@example.com');               //Name is optional
-            $mail->addReplyTo($email);
-            // $mail->addCC('cc@example.com');
-            // $mail->addBCC('bcc@example.com');
+            $mail->addAddress($to);     //Add a recipient
+            // $mail->addReplyTo($to);
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
@@ -92,7 +84,7 @@ class Mail
         }
     }
 
-    public static function forgotPasswordEmail($email, $token)
+    public static function forgotPasswordEmail($to, $token)
     {
         $mail = new PHPMailer(true);
 
@@ -109,14 +101,14 @@ class Mail
 
             //Recipients
             $mail->setFrom('mailcorvid@an-nur-info-tech.com', 'Mail');
-            $mail->addAddress('no-reply@an-nur-info-tech.com');     //Add a recipient
+            $mail->addAddress($to);     //Add a recipient
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
             $mail->Subject = 'Password Reset Request';
             $mailTemplate =
                 "
-                    <h1> Password reset request for $email </h1>
+                    <h1> Password reset request for $to </h1>
                     <h4> You requested for password reset if yes Please click 
                         <a href='https://mailcorvid.an-nur-info-tech.com/password-reset?token=$token'>
                         Here
