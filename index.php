@@ -1,6 +1,6 @@
 <?php
-include("includes/header.php");
 include("code.php");
+include("includes/header.php");
 ?>
 
   <div class="container">
