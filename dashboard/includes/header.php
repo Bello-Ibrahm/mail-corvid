@@ -3,8 +3,8 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
-include("../database/Database.php");
 include("code.php");
+include("../database/Database.php");
 include("auth.php");
 ?>
 <!DOCTYPE html>
